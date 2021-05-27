@@ -1,2 +1,2 @@
-# SopaDeLetrasConJavaScript
+# SopaDeLetrasJavaScript
 Created with CodeSandbox
