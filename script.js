@@ -20,7 +20,7 @@ var palabras = [
   "LINK",
   "SERVIDOR"
 ];
-
+var idResultados = [];
 function generaTabla() {
   // get the reference for the body
   var mybody = document.getElementById("mtabla");
@@ -30,11 +30,11 @@ function generaTabla() {
   var mytablebody = document.createElement("tbody");
 
   // creating all cells
-  for (let j = 0; j < 30; j++) {
+  for (let j = 0; j < 31; j++) {
     // creates a <tr> element
     var mycurrent_row = document.createElement("tr");
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 31; i++) {
       // creates a <td> element
       var icorrecta = i;
       var jcorrecta = j;
@@ -115,121 +115,7 @@ function horizontalVertical() {
   var position = Math.floor(Math.random() * 2);
   return position;
 }
-/*
-function cabe(posicioninicial, palabra, position) {
-let cabee = true;
-let solodigito = false;
-let idderecho = posicioninicial.substr(2, 3);
-let idizquierdo = posicioninicial.substr(0, 2);
-console.log(
-"entra con: " +
-  palabra +
-  " pisción inicial: " +
-  posicioninicial +
-  " positión: " +
-  position +
-  " idderecho: " +
-  idderecho +
-  " idisquierdo: " +
-  idizquierdo
-);
-if (
-parseInt(30, 10) - parseInt(idizquierdo, 10) <= palabra.length ||
-parseInt(30, 10) - parseInt(idderecho, 10) <= palabra.length
-) {
-console.log("cabee = false 1");
-cabee = false;
-} else {
-//horizonal
-if (position == 0) {
-  if (posicioninicial[2] == "0") {
-    idderecho = posicioninicial[3];
-    solodigito = true;
-  } else {
-    idderecho = posicioninicial.substr(2, 3);
-  }
-  for (
-    let index = parseInt(idderecho, 10);
-    index < parseInt(idderecho, 10) + palabra.length;
-    index++
-  ) {
-    if (solodigito == true) {
-      if (
-        document.getElementById(idizquierdo + +"0" + idderecho.toString())
-          .textContent !== "."
-      ) {
-        cabee = true;
-      } else {
-        console.log("cabee = false 2");
-        cabee = false;
-        break;
-      }
-    } else {
-      if (
-        document.getElementById(idizquierdo + idderecho.toString())
-          .textContent != "."
-      ) {
-        cabee = true;
-      } else {
-        console.log("cabee = false 3");
-        cabee = false;
-        break;
-      }
-    }
-  }
 
-  //vertical
-} else {
-  if (posicioninicial[0] == "0") {
-    idizquierdo = "0" + posicioninicial[3];
-  } else {
-    idizquierdo = posicioninicial.substr(0, 1);
-  }
-  for (
-    let index = parseInt(idizquierdo, 10);
-    index < parseInt(idizquierdo, 10) + palabra.length;
-    index++
-  ) {
-
-    if (solodigito == true) {
-      if (
-        document.getElementById("0" + idizquierdo.toString() + idderecho)
-          .textContent != "."
-      ) {
-        cabee = true;
-      } else {
-        cabee = false;
-        console.log("cabee = false 4");
-        
-        break;
-      }
-    } else {
-      if (
-        document.getElementById(idizquierdo + idderecho.toString())
-          .textContent != "."
-      ) {
-        cabee = true;
-      } else {
-          console.log("cabee = false 5");
-        cabee = false;
-        break;
-      }
-    }
-  }
-}
-if (cabee == false) {
-  console.log("se repite cabe");
-  cabe(posicionInicial(), palabra, position);
-} else {
-  console.log(
-    "entra a cabe: " + palabra + " posicion inicial: " + posicioninicial
-  );
-  insertarPalabraEnTabla(palabra, posicioninicial, position);
-}
-}
-}
-
-*/
 function cabe(posicioninicial, palabra, position) {
   var cabee = true;
   var idderecho = posicioninicial.substr(2, 3);
@@ -241,14 +127,13 @@ function cabe(posicioninicial, palabra, position) {
 
   if (30 - idizquierdo < palabra.length || 30 - idderecho < palabra.length) {
     cabee = false;
-  }
-  {
+  } else {
     // horizontal(2)
     if (position == 0) {
       if (posicioninicial[2] == 0) {
         for (
-          let index = parseInt(posicioninicial[3]);
-          index < palabra.length + parseInt(posicioninicial[3]);
+          let index = parseInt(posicioninicial[3], 10);
+          index < palabra.length + parseInt(posicioninicial[3], 10);
           index++
         ) {
           if (index / 10 >= 1) {
@@ -270,7 +155,7 @@ function cabe(posicioninicial, palabra, position) {
       } else {
         for (
           let index = parseInt(idderecho);
-          index < palabra.length + parseInt(idderecho);
+          index < palabra.length + parseInt(idderecho, 10);
           index++
         ) {
           if (
@@ -286,8 +171,8 @@ function cabe(posicioninicial, palabra, position) {
     } else {
       if (posicioninicial[0] == 0) {
         for (
-          let index = parseInt(posicioninicial[1]);
-          index < palabra.length + parseInt(posicioninicial[1]);
+          let index = parseInt(posicioninicial[1], 10);
+          index < palabra.length + parseInt(posicioninicial[1], 10);
           index++
         ) {
           if (index / 10 >= 1) {
@@ -308,8 +193,8 @@ function cabe(posicioninicial, palabra, position) {
         }
       } else {
         for (
-          let index = parseInt(idizquierdo);
-          index < palabra.length + parseInt(idizquierdo);
+          let index = parseInt(idizquierdo, 10);
+          index < palabra.length + parseInt(idizquierdo, 10);
           index++
         ) {
           if (
@@ -329,13 +214,23 @@ function cabe(posicioninicial, palabra, position) {
         " si cabe en posición: " +
         posicioninicial +
         "en position: " +
-        position
+        position +
+        " palabra: " +
+        palabra
     );
     insertarPalabraEnTabla(palabra, posicioninicial, position);
   } else {
     console.log("se repite cabe");
     posicioninicial = posicionInicial();
     position = horizontalVertical();
+    console.log(
+      "se repite cabe con posinic: " +
+        posicioninicial +
+        " pala: " +
+        palabra +
+        " position: " +
+        position
+    );
     cabe(posicioninicial, palabra, position);
   }
 }
@@ -365,14 +260,15 @@ function insertarPalabraEnTabla(palabra, posicioninicial, position) {
         if (index / 10 >= 1) {
           document.getElementById(idizquierdo + index.toString()).innerHTML =
             palabra[letra];
+          idResultados.push(idizquierdo + index.toString());
           letra++;
 
-          document.getElementById(idizquierdo + index.toString()).innerHTML =
-            palabra[letra];
+          //document.getElementById(idizquierdo + index.toString()).innerHTML = palabra[letra];
         } else {
           document.getElementById(
             idizquierdo + "0" + index.toString()
           ).innerHTML = palabra[letra];
+          idResultados.push(idizquierdo + "0" + index.toString());
           letra++;
         }
       }
@@ -384,6 +280,7 @@ function insertarPalabraEnTabla(palabra, posicioninicial, position) {
       ) {
         document.getElementById(idizquierdo + index.toString()).innerHTML =
           palabra[letra];
+        idResultados.push(idizquierdo + index.toString());
         letra++;
       }
     }
@@ -399,11 +296,13 @@ function insertarPalabraEnTabla(palabra, posicioninicial, position) {
         if (index / 10 >= 1) {
           document.getElementById(index.toString() + idderecho).innerHTML =
             palabra[letra];
+          idResultados.push(index.toString() + idderecho);
           letra++;
         } else {
           document.getElementById(
             "0" + index.toString() + idderecho
           ).innerHTML = palabra[letra];
+          idResultados.push("0" + index.toString() + idderecho);
           letra++;
         }
       }
@@ -415,71 +314,36 @@ function insertarPalabraEnTabla(palabra, posicioninicial, position) {
       ) {
         document.getElementById(index.toString() + idderecho).innerHTML =
           palabra[letra];
+        idResultados.push(index.toString() + idderecho);
         letra++;
       }
     }
   }
 }
-/*
-function insertarPalabraEnTabla(palabra, posicioninicial, position) {
-console.log(
-  "entra palabra: " +
-    palabra +
-    ", posición inicial: " +
-    posicioninicial +
-    ", position: " +
-    position
-);
-if (position == 0) {
-  let posicionfija = posicioninicial[0] + posicioninicial[1];
-  let posicionnofija = parseInt(posicioninicial[2] + posicioninicial[3], 10);
 
-  console.log(
-    "pos fija: " + posicionfija + " pos nofija:  " + posicionnofija
-  );
-  let index = 0;
-
-  for (let y = posicionnofija; y < palabra.length + posicionnofija; y++) {
-    let yy = y;
-    if (posicionnofija / 10 < 1) {
-      yy = "0" + y.toString();
-    }
-    document.getElementById(posicionfija + yy.toString()).innerHTML =
-      palabra[index];
-    index++;
-  }
-} else {
-  // vertical
-
-  let posicionfija = posicioninicial[0] + posicioninicial[1];
-  let posicionnofija = parseInt(posicioninicial[2] + posicioninicial[3], 10);
-  let index = 0;
-
-  for (let y = posicionnofija; y < palabra.length + posicionnofija; y++) {
-    let yy = y;
-    if (posicionnofija / 10 < 1) {
-      yy = "0" + y.toString();
-    }
-
-    document.getElementById(yy.toString() + posicionfija).innerHTML =
-      palabra[index];
-    index++;
+function mostrarResultado() {
+  console.log(idResultados);
+  for (let index = 0; index < idResultados.length; index++) {
+    document.getElementById(idResultados[index]).style.background = "red";
   }
 }
-}
-*/
 
+function numeroAleatorioparalaspalabras() {
+  var position = Math.floor(Math.random() * 20);
+  return position;
+}
 function llenarTabla() {
   //buscamos la primera palabra
-  for (let j = 0; j < palabras.length; j++) {
-    let palabra = palabras[j];
-    let posicioninicial = posicionInicial();
+  let num = numeroAleatorioparalaspalabras();
+  for (var j = 0; j < palabras.length; j++) {
+    var palabra = palabras[j];
+    var posicioninicial = posicionInicial();
 
-    let position = horizontalVertical();
+    var position = horizontalVertical();
     cabe(posicioninicial, palabra, position);
   }
 
-  //llenarVacios();
+  llenarVacios();
 }
 
 function llenarVacios() {
