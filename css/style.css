@@ -11,7 +11,7 @@ body {
   text-align: center;
 }
 .stileDiv {
-  background: rgba(83, 73, 73, 0.3);
+  background: #2c2a2a4d;
   text-align: center;
   margin: 5%;
   padding: 5%;
@@ -19,13 +19,16 @@ body {
   opacity: 0.5;
 }
 .caja {
+  opacity: 0.8;
   max-width: 1200px;
   width: 90%;
-  background: rgb(169, 169, 169, 0.95);
+  background: lightgray;
   margin: 1rem;
-  padding: 1rem;
+
   border-radius: 15px;
-  opacity: 0.5;
+
+  display: table-cell;
+  padding: 20px;
 }
 
 td {
