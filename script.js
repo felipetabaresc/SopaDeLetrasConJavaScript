@@ -30,11 +30,11 @@ function generaTabla() {
   var mytablebody = document.createElement("tbody");
 
   // creating all cells
-  for (let j = 0; j < 31; j++) {
+  for (let j = 0; j < 30; j++) {
     // creates a <tr> element
     var mycurrent_row = document.createElement("tr");
 
-    for (let i = 0; i < 31; i++) {
+    for (let i = 0; i < 30; i++) {
       // creates a <td> element
       var icorrecta = i;
       var jcorrecta = j;
